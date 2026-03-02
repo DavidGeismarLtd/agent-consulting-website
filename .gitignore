@@ -25,3 +25,18 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# Ignore key files for decrypting credentials and more.
+/config/*.key
+
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
+
+# Rails
+/tmp/
+/log/
+/storage/
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/public/assets
