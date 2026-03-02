@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: agentforce
+    runtime: docker
+    plan: starter  # Change to 'free' if you want the free tier
+    region: oregon  # Change to your preferred region
+    branch: main
+    healthCheckPath: /up
+    autoDeploy: true
+    envVars:
+      - key: RAILS_MASTER_KEY
+        sync: false  # You'll add this manually in Render dashboard
+      - key: RAILS_ENV
+        value: production
+      - key: SOLID_QUEUE_IN_PUMA
+        value: true
+      - key: WEB_CONCURRENCY
+        value: 2
+      - key: RAILS_MAX_THREADS
+        value: 5
+      - key: DATABASE_URL
+        fromDatabase:
+          name: agentforce-db
+          property: connectionString
+
+databases:
+  - name: agentforce-db
+    databaseName: agentforce_production
+    plan: starter  # Change to 'free' if you want the free tier
+    region: oregon  # Should match your web service region
+
